@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>History对象</title>
+</head>
+<body>
+
+<h1>第二个页面</h1>
+
+<input id="back" type="button" value="后退">
+
+<script>
+    var back = document.getElementById("back");
+
+    // back()方法， go方法
+    back.onclick = function () {
+        history.back();
+        // history.go(-1);
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>表格全选反选</title>
+    <style>
+        table{
+            border: 1px solid;
+            width: 500px;
+            margin-left: 30%;
+        }
+
+        td,th{
+            text-align: center;
+            border: 1px solid;
+        }
+        div{
+            margin-top: 10px;
+            margin-left: 30%;
+        }
+
+        .out{
+            background-color: white;
+        }
+        .over{
+            background-color: pink;
+        }
+    </style>
+
+    <script>
+        // 1.在页面加载完成后，绑定事件
+        window.onload = function () {
+            // 2.给 全选 按钮绑定单击事件
+            document.getElementById("selectAll").onclick = function () {
+                var stus = document.getElementsByName("stu");
+                for (var i = 0; i < stus.length; i++) {
+                    stus[i].checked = true;
+                }
+            }
+
+            // 3.给 全不选 按钮绑定单击事件
+            document.getElementById("unSelectAll").onclick = function () {
+                var stus = document.getElementsByName("stu");
+                for (var i = 0; i < stus.length; i++) {
+                    stus[i].checked = false;
+                }
+            }
+
+            // 3.给 反选 按钮绑定单击事件
+            document.getElementById("selectRev").onclick = function () {
+                var stus = document.getElementsByName("stu");
+                for (var i = 0; i < stus.length; i++) {
+                    stus[i].checked = !stus[i].checked;
+                }
+            }
+
+            // 4.表头checkbox选中与否即为，全选全不选
+            document.getElementById("allCheckbox").onclick = function () {
+                var stus = document.getElementsByName("stu");
+                for (var i = 0; i < stus.length; i++) {
+                    // 事件中，this就是触发该事件的事件源
+                    stus[i].checked = this.checked;
+                }
+            }
+
+            // 5.给tr绑定鼠标覆盖/移出事件，修改样式
+            var trs = document.getElementsByTagName("tr");
+            for (var i = 0; i < trs.length; i++) {
+                trs[i].onmouseover = function () {
+                    this.className = "over";
+                }
+                trs[i].onmouseout = function () {
+                    this.className = "out";
+                }
+            }
+
+        }
+    </script>
+</head>
+<body>
+
+<table>
+    <caption>学生信息表</caption>
+    <tr>
+        <th><input type="checkbox" name="stu" id="allCheckbox"></th>
+        <th>编号</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>操作</th>
+    </tr>
+
+    <tr>
+        <td><input type="checkbox" name="stu"></td>
+        <td>1</td>
+        <td>令狐冲</td>
+        <td>男</td>
+        <td><a href="javascript:void(0);">删除</a></td>
+    </tr>
+
+    <tr>
+        <td><input type="checkbox" name="stu"></td>
+        <td>2</td>
+        <td>任我行</td>
+        <td>男</td>
+        <td><a href="javascript:void(0);">删除</a></td>
+    </tr>
+
+    <tr>
+        <td><input type="checkbox" name="stu"></td>
+        <td>3</td>
+        <td>岳不群</td>
+        <td>?</td>
+        <td><a href="javascript:void(0);">删除</a></td>
+    </tr>
+
+</table>
+<div>
+    <input type="button" id="selectAll" value="全选">
+    <input type="button" id="unSelectAll" value="全不选">
+    <input type="button" id="selectRev" value="反选">
+</div>
+</body>
+</html>

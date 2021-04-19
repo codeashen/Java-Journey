@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>验证码</title>
+
+    <script>
+        window.onload = function () {
+            var img = document.getElementById("img_code");
+            var change = document.getElementById("change");
+
+            img.onclick = changeImg;
+            change.onclick = changeImg;
+
+            function changeImg() {
+                // 加时间戳作为参数，防止缓存导致图片不变
+                var time = new Date().getTime();
+                img.src = "/servlet/checkCode?" + time;
+            }
+        }
+    </script>
+</head>
+<body>
+
+<form action="#">
+    <img id="img_code" src="/servlet/checkCode">
+    <a id="change" href="javascript:void(0)">看不清，换一张</a><br>
+    <input type="text" name="code" placeholder="输入验证码">
+</form>
+
+</body>
+</html>

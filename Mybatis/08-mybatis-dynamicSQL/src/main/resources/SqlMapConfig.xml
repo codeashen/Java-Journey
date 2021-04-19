@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- Mybatis主配置文件 -->
+<configuration>
+    <!-- 配置properties -->
+    <properties resource="jdbcConfig.properties"/>
+
+    <!-- 配置别名 -->
+    <typeAliases>
+        <package name="com.ashen.dynaimcsql.domain"/>
+    </typeAliases>
+    
+    <!-- 配置Mybatis环境 -->
+    <environments default="mysql">
+        <!-- 配置mysql环境 -->
+        <environment id="mysql">
+            <!-- 事务类型 -->
+            <transactionManager type="JDBC"></transactionManager>
+
+            <!--
+                dataSource标签，type属性就是表示采用何种连接池方式。
+                type属性的取值：
+                    POOLED	 采用传统的javax.sql.DataSource规范中的连接池，mybatis中有针对规范的实现
+                    UNPOOLED 采用传统的获取连接的方式，虽然也实现Javax.sql.DataSource接口，但是并没有使用池的思想。
+                    JNDI	 采用服务器提供的JNDI技术实现，来获取DataSource对象，不同的服务器所能拿到DataSource是不一样。
+                         注意：如果不是web或者maven的war工程，是不能使用的。
+                         我们课程中使用的是tomcat服务器，采用连接池就是dbcp连接池。
+            -->
+            <!-- 数据源 -->
+            <dataSource type="POOLED">
+                <!-- 数据库连接需要的4个信息 -->
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- 指定映射配置文件的位置 -->
+    <mappers>
+        <package name="com.ashen.dynaimcsql.dao"></package>
+    </mappers>
+</configuration>

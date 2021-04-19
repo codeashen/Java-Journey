@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Element对象</title>
+</head>
+<body>
+
+<a id="link">点我</a>
+<br>
+
+<input id="setAttr" type="button" value="设置a标签属性">
+<input id="removeAttr" type="button" value="移除a标签属性">
+
+<script>
+    /*
+    Element：元素对象
+        1. 获取/创建：通过document来获取和创建
+        2. 方法：
+            1) removeAttribute()： 删除属性
+            2) setAttribute()：    设置属性
+     */
+    var element_a = document.getElementById("link");
+    var setAttr = document.getElementById("setAttr");
+    var removeAttr = document.getElementById("removeAttr");
+
+    setAttr.onclick = function () {
+        element_a.setAttribute("href", "https://www.baidu.com");
+    }
+
+    removeAttr.onclick = function () {
+        element_a.removeAttribute("href");
+    }
+</script>
+
+</body>
+</html>

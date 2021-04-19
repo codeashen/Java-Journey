@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>History对象</title>
+</head>
+<body>
+<!--
+History：历史记录对象
+    1. 创建(获取)：
+        1. window.history
+        2. history
+
+    2. 方法：
+        * back()	加载 history 列表中的前一个 URL。
+        * forward()	加载 history 列表中的下一个 URL。
+        * go(参数)	加载 history 列表中的某个具体页面。
+            * 参数：
+                * 正数：前进几个历史记录
+                * 负数：后退几个历史记录
+    3. 属性：
+        * length	返回当前窗口历史列表中的 URL 数量。
+-->
+
+<h1>第一个页面</h1>
+<a href="09_BOM_History对象2.html">去下一个页面</a><br>
+
+<input id="getHisCount" type="button" value="获取当前窗口历史记录数量">
+<input id="forword" type="button" value="前进">
+
+<script>
+    var getHisCount = document.getElementById("getHisCount");
+    var forword = document.getElementById("forword");
+
+    // length属性
+    getHisCount.onclick = function (ev) {
+        var count = history.length;
+        alert("当前页面历史记录数：" + count);
+    }
+
+    // forword方法  go方法
+    forword.onclick = function () {
+        history.forward();
+        // history.go(1);
+    }
+
+</script>
+</body>
+</html>

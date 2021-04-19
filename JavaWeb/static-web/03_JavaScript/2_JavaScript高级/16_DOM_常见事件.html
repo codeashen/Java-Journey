@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>常见事件</title>
+    <style>
+        #city option {
+            display: none;
+        }
+    </style>
+    <script>
+        /*
+        常见的事件：
+            1. 点击事件：
+                1. onclick：单击事件
+                2. ondblclick：双击事件
+            2. 焦点事件
+                1. onblur：失去焦点。
+                    * 一般用于表单验证
+                2. onfocus:元素获得焦点。
+
+            3. 加载事件：
+                1. onload：一张页面或一幅图像完成加载。
+
+            4. 鼠标事件：
+                1. onmousedown	鼠标按钮被按下。
+                    * 定义方法时，定义一个形参，接受event对象。
+                    * event对象的button属性可以获取鼠标按钮键被点击了。
+                2. onmouseup	鼠标按键被松开。
+                3. onmousemove	鼠标被移动。
+                4. onmouseover	鼠标移到某元素之上。
+                5. onmouseout	鼠标从某元素移开。
+
+
+            5. 键盘事件：
+                1. onkeydown	某个键盘按键被按下。
+                2. onkeyup		某个键盘按键被松开。
+                3. onkeypress	某个键盘按键被按下并松开。
+
+            6. 选择和改变
+                1. onchange	域的内容被改变。
+                2. onselect	文本被选中。
+
+            7. 表单事件：
+                绑定对象因该是form表单，form.onsubmit = function(){}
+                1. onsubmit	确认按钮被点击。
+                    * 可以阻止表单的提交
+                        * 方法返回false则表单被阻止提交。
+                2. onreset	重置按钮被点击。
+         */
+
+        // onload  加载事件   window对象加载后，会执行
+        window.onload = function () {
+            // onblur 失去焦点
+            document.getElementById("username").onblur = function () {
+                document.getElementById("verify_id").innerText = "校验用户名..."
+            }
+
+            // onmouseover 鼠标指针覆盖
+            var light = document.getElementById("img_light");
+            light.onmouseover = function () {
+                light.style.border = "5px solid red";
+            }
+            light.onmouseout = function () {
+                light.style.border = "none";
+            }
+
+            // onmousedown/onkeydown 鼠标/键盘按下事件
+            // 通过event可以得知哪个键被按下了
+            light.onmousedown = function (event) {
+                alert("按下鼠标" + event.button + "键")
+            }
+            document.getElementById("username").onkeydown = function (event) {
+                document.getElementById("key").innerHTML += "按键：" + event.key + "<br>";
+            }
+
+            // onchange 域内容改变 (自己写的模拟省市联动)
+            var provinceNow = "";
+            document.getElementById("province").onchange = function () {
+                var province = document.getElementById("province").value;
+                var cities_no = document.getElementsByClassName(provinceNow);
+                var cities = document.getElementsByClassName(province);
+                if (provinceNow != "") {
+                    for (var i = 0; i < cities_no.length; i++) {
+                        cities_no[i].style.display = "none";
+                    }
+                }
+                for (var i = 0; i < cities.length; i++) {
+                    cities[i].style.display = "inline";
+                }
+                document.getElementById("city").value = "0";
+                provinceNow = province;
+            }
+
+            // onsubmit 表单提交事件
+           /* document.getElementById("form").onsubmit = function () {
+                return false; // 取消浏览器默认行为 —— 提交表单
+            }*/
+        }
+
+        // 还有方法就是在表单处设置属性 onclick="return false"
+        function checkForm() {
+            // 模拟校验表单不通过，不予提交
+            return false;
+        }
+
+    </script>
+</head>
+<body>
+<img src="img/on.gif" id="img_light">
+<form id="form" action="#" onclick="return checkForm();">
+    用户名：<input id="username" name="username" type="text"><span id="verify_id"></span><br>
+    城市：<select name="province" id="province">
+        <option value="0">--省份--</option>
+        <option value="anhui">安徽</option>
+        <option value="shandong">山东</option>
+    </select>
+    <select name="city" class="city" id="city">
+        <option class="city" value="0">--城市--</option>
+        <option class="anhui" value="hefei">合肥</option>
+        <option class="anhui" value="wuhu">芜湖</option>
+        <option class="shandong" value="jinan">济南</option>
+        <option class="shandong" value="qingdao">青岛</option>
+    </select>
+    <br>
+    <input type="submit" value="提交">
+</form>
+<div id="key"></div>
+</body>
+</html>

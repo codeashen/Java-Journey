@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 指定namespace，说明关联的是哪个dao -->
+<mapper namespace="com.ashen.crud.dao.IUserDao">
+
+    <!-- 配置 查询结果字段名和实体类属性名的对应关系，用来替代resultType-->
+    <resultMap id="userMap" type="com.ashen.crud.domain.User">
+        <!-- 主键字段的对应关系 -->
+        <id column="id" property="userId"></id>
+        <!-- 非主键字段的对应关系 -->
+        <result column="username" property="userName"></result>
+        <result column="birthday" property="birthday"></result>
+        <result column="sex" property="gender"></result>
+        <result column="address" property="address"></result>
+    </resultMap>
+    
+    <!-- 配置查询所有用户信息 -->
+    <select id="findAll" resultMap="userMap">
+        <!-- 使用别名，不需要使用resultMap，运行效率稍高 
+        select username userName,
+            birthday birthday,
+            sex gender,
+            address address
+        from user -->
+        select * from user
+    </select>
+
+    <!-- 保存方法 -->
+    <!--
+         【selectKey此处用法】：
+            使用mysql的 last_insert_id() 获取自增长的用户id，
+            插入User后，获取数据库自增长的id字段，赋值到参数user的id属性中，
+            相当于id回写
+         【属性解释】：
+            resultType      返回值类型-
+            keyProperty     实体类中的属性名
+            keyColumn       表中的字段名
+            order           在插入语句的之前还是之后执行，BEFORE-之前，AFTER-之后
+     -->
+    <insert id="saveUser" parameterType="com.ashen.crud.domain.User">
+        <!-- 配置插入操作后，获取插入数据的id -->
+        <selectKey resultType="Integer" keyProperty="userId" keyColumn="id" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+        insert into user(username, birthday, sex, address)
+        values (#{userName}, #{birthday}, #{gender}, #{address})
+    </insert>
+
+    <!-- 更新用户 -->
+    <update id="updateUser" parameterType="com.ashen.crud.domain.User">
+        update user
+        set username = #{userName},
+            birthday = #{birthday},
+            sex = #{gender},
+            address = #{address}
+        where id = #{userId}
+    </update>
+
+    <!-- 删除用户 -->
+    <delete id="deleteUserById" parameterType="java.lang.Integer">
+        delete from user where id = #{userId}
+    </delete>
+    
+    <!-- 根据id查询用户 -->
+    <select id="findById" resultMap="userMap" parameterType="Integer">
+        select * from user where id = #{userId}
+    </select>
+
+    <!-- 模糊查询姓名 -->
+    <!-- 【#和$的区别】#{}用了PreparedStatement预处理，${}用了Statement拼接参数 -->
+    <select id="findByName" resultMap="userMap" parameterType="String">
+        select * from user
+        where username like #{keyword}
+        <!-- where username like '%${value}%' 了解 -->
+    </select>
+
+    <!-- 查询总记录条数 -->
+    <select id="findTotal" resultType="java.lang.Integer">
+        select count(1) from user
+    </select>
+
+    <!-- VO对象作为查询条件-->
+    <select id="findUserByVo" resultMap="userMap" parameterType="com.ashen.crud.domain.QueryVo">
+        select * from user
+        where username = #{user.userName}
+    </select>
+</mapper>

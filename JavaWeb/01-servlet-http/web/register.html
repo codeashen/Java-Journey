@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>获取请求体数据</title>
+</head>
+<body>
+
+<h3>演示获取参数</h3>
+<form action="/servlet/req_parameter" method="post">
+    用户名:<input type="text" placeholder="输入用户名" name="username"><br>
+    密码:<input type="text" placeholder="输入密码" name="password"><br>
+    爱好:<input type="checkbox" name="hobby" value="study">学习
+        <input type="checkbox" name="hobby" value="game">游戏
+
+    <input type="submit" value="提交">
+</form>
+
+<h3>演示解决中文乱码</h3>
+<form action="/servlet/encoding" method="post">
+    用户名：<input type="text" name="username" placeholder="输入用户名"><br>
+    <input type="submit" value="提交">
+</form>
+
+</body>
+</html>

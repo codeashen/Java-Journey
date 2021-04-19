@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>switch语句</title>
+    <script>
+        /*
+        与Java不同的是
+        JS中的switch什么原始数据类型都可以接收
+        也可以case不同数据类型的值
+         */
+
+        var a;
+        switch (a) {
+            case 1:
+                alert("number");
+                break;
+            case "abc":
+                alert("string");
+                break;
+            case true:
+                alert("boolean");
+                break;
+            case null:
+                alert("null");
+                break;
+            case undefined:
+                alert("undefined");
+                break;
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>CSS全局样式</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+<h1>按钮</h1>
+<a class="btn btn-default" href="#" role="button">Link</a>
+<button class="btn btn-default" type="submit">Button</button>
+<input class="btn btn-default" type="button" value="Input">
+<input class="btn btn-default" type="submit" value="Submit">
+<br>
+<button type="button" class="btn btn-default">（默认样式）Default</button>
+<button type="button" class="btn btn-primary">（首选项）Primary</button>
+<button type="button" class="btn btn-success">（成功）Success</button>
+<button type="button" class="btn btn-info">（一般信息）Info</button>
+<button type="button" class="btn btn-warning">（警告）Warning</button>
+<button type="button" class="btn btn-danger">（危险）Danger</button>
+<button type="button" class="btn btn-link">（链接）Link</button>
+
+
+<h1>图片</h1>
+<img src="img/banner_1.jpg" class="img-responsive">
+<img src="img/jiangxuan_4.jpg" class="img-rounded">
+<img src="img/jiangxuan_4.jpg" class="img-circle">
+<img src="img/jiangxuan_4.jpg" class="img-thumbnail">
+
+
+<h1>表格</h1>
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>编号</th>
+        <th>姓名</th>
+        <th>年龄</th>
+    </tr>
+    <tr>
+        <td>001</td>
+        <td>张三</td>
+        <td>23</td>
+    </tr>
+    <tr>
+        <td>002</td>
+        <td>张三</td>
+        <td>23</td>
+    </tr>
+    <tr>
+        <td>003</td>
+        <td>张三</td>
+        <td>23</td>
+    </tr>
+</table>
+
+
+<h1>表单</h1>
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="exampleInputEmail1" class="col-sm-2 control-label">Email address</label>
+
+        <div class="col-sm-5">
+            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+        <div class="col-sm-5">
+            <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-5">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox"> Remember me
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-5">
+            <button type="submit" class="btn btn-default">Sign in</button>
+        </div>
+    </div>
+</form>
+
+</body>

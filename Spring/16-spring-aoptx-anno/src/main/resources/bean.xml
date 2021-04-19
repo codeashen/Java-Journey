@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:contex="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 包扫描 -->
+    <contex:component-scan base-package="com.ashen.aoptx.anno"/>
+
+    <!-- 开启注解AOP支持 -->
+    <aop:aspectj-autoproxy/>
+
+    <!-- 配置QueryRunner
+        不希望QueryRunner操作数据库时从数据源中获取连接，所以不注入数据源了，
+             详见AccountDaoImpl文档注释 -->
+    <bean id="runner" class="org.apache.commons.dbutils.QueryRunner" scope="prototype">
+        <!-- 注入数据源（构造方法注入） -->
+        <!-- <constructor-arg name="ds" ref="dataSource"></constructor-arg> -->
+    </bean>
+
+    <!-- 配置数据源 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <!-- 注入数据库连接信息 -->
+        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/demo_mybatis"/>
+        <property name="user" value="root"/>
+        <property name="password" value="root"/>
+    </bean>
+    
+</beans>

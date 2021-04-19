@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ashen.datasource.dao.IUserDao">
+
+    <!-- 配置查询所有用户信息 -->
+    <select id="findAll" resultType="com.ashen.datasource.domain.User">
+        select * from user
+    </select>
+
+    <!-- 保存方法 -->
+    <insert id="saveUser" parameterType="com.ashen.datasource.domain.User">
+        <selectKey resultType="Integer" keyProperty="id" keyColumn="id" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+        insert into user(username, birthday, sex, address)
+        values (#{username}, #{birthday}, #{id}, #{address})
+    </insert>
+
+    <!-- 更新用户 -->
+    <update id="updateUser" parameterType="com.ashen.datasource.domain.User">
+        update user
+        set username = #{username},
+            birthday = #{birthday},
+            sex = #{sex},
+            address = #{address}
+        where id = #{id}
+    </update>
+
+    <!-- 删除用户 -->
+    <delete id="deleteUserById" parameterType="java.lang.Integer">
+        delete from user where id = #{id}
+    </delete>
+
+    <!-- 根据id查询用户 -->
+    <select id="findById" resultType="com.ashen.datasource.domain.User" parameterType="Integer">
+        select * from user where id = #{id}
+    </select>
+
+    <!-- 模糊查询姓名 -->
+    <select id="findByName" resultType="com.ashen.datasource.domain.User" parameterType="String">
+        select * from user
+        where username like #{keyword}
+    </select>
+
+    <!-- 查询总记录条数 -->
+    <select id="findTotal" resultType="java.lang.Integer">
+        select count(1) from user
+    </select>
+
+    <!-- VO对象作为查询条件-->
+    <select id="findUserByVo" resultType="com.ashen.datasource.domain.User" parameterType="com.ashen.datasource.domain.QueryVo">
+        select * from user
+        where username = #{user.username}
+    </select>
+</mapper>

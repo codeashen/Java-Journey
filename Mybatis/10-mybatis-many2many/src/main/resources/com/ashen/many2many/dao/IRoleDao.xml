@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ashen.many2many.dao.IRoleDao">
+
+    <!-- 定义Role表的resultMap -->
+    <resultMap id="roleMap" type="Role">
+        <id property="roleId" column="rid"/>
+        <result property="roleName" column="role_name"/>
+        <result property="roleDesc" column="role_desc"/>
+        <collection property="users" ofType="User">
+            <id property="id" column="id"/>
+            <result property="username" column="username"/>
+            <result property="birthday" column="birthday"/>
+            <result property="sex" column="sex"/>
+            <result property="address" column="address"/>
+        </collection>
+    </resultMap>
+
+    <!-- 查询所有角色 -->
+    <select id="findAll" resultMap="roleMap">
+        select r.ID rid, r.ROLE_NAME, r.ROLE_DESC, u.*
+        from role r
+        left join user_role ur on r.ID = ur.RID
+        left join user u on ur.UID = u.id
+    </select>
+</mapper>

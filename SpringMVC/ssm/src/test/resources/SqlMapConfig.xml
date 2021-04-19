@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- Mybatis主配置文件，SSM整合不需要该文件了 -->
+<configuration>
+    <!-- 配置properties
+        可以在标签内部配置连接数据库的信息。也可以通过属性引用外部配置文件信息 -->
+    <properties resource="jdbcConfig.properties"/>
+    
+    <!-- 配置Mybatis环境 -->
+    <environments default="mysql">
+        <!-- 配置mysql环境 -->
+        <environment id="mysql">
+            <!-- 事务类型 -->
+            <transactionManager type="JDBC"/>
+            <!-- 数据源 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- 指定映射配置文件的位置 -->
+    <mappers>
+        <!-- <mapper class="com.ashen.ssm.dao.AccountDao"/> -->
+        <package name="com.ashen.ssm.dao"/>
+    </mappers>
+</configuration>

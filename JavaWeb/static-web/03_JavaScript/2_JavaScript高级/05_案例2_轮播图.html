@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播图</title>
+</head>
+<body>
+<img src="img/banner_1.jpg" id="banner" width="100%">
+
+<script>
+    var banner = document.getElementById("banner");
+    var i = 1; //初始banner编号
+
+    function change() {
+        i++;
+        if (i > 3) {
+            i =1;
+        }
+        banner.src = "img/banner_" + i + ".jpg";
+    }
+
+    setInterval(change, 3000);
+</script>
+</body>
+</html>

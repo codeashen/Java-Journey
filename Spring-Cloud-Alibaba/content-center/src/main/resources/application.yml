@@ -1,0 +1,112 @@
+spring:
+  cloud:
+    nacos:
+      #指定nacos server地址
+      server-addr: localhost:8848
+      discovery:
+        #指定命名空间、集群
+        namespace: 01511f2b-269d-442f-8cde-91a6220ce63d
+        cluster-name: Shanghai
+        #指定元数据
+        metadata: 
+          author: ashen
+          date: 2021-01-27 18:46
+    sentinel:
+      transport:
+        # 指定sentinel控制台的地址
+        dashboard: localhost:8080
+      #filter:
+      #  # 关闭随Spring MVC端点的保护，即不自动将Spring MVC端点作为sentinel资源
+      #  enabled: false
+    stream:
+      rocketmq:
+        binder:
+          name-server: localhost:9876
+        bindings:
+          output: 
+            producer:
+              transactional: true
+              group: tx-add-bonus-group
+      bindings:
+        output:
+          # 用来指定topic
+          destination: add-bonus
+        # 和 @Output注解的value一致
+        my-output:
+          destination: stream-my-topic
+  application:
+    # spring.application.name对应注册到nacos上的服务名
+    name: content-center
+  datasource:
+    url: jdbc:mysql://120.92.164.231:3306/note_content
+    hikari:
+      username: root
+      password: root
+      driver-class-name: com.mysql.cj.jdbc.Driver
+  zipkin:
+    base-url: http://localhost:9411/
+  sleuth:
+    sampler:
+      # 请求取样率，上报到zipkin的trace比例，默认是 0.1（10%），这里为了测试方便配置所有trace都上传
+      probability: 1.0
+      
+server:
+  port: 8002
+
+# 注解配置Ribbon负载均衡规则
+#user-center: 
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
+# 饥饿加载
+ribbon:
+  eager-load:
+    enabled: true
+    clients: user-center
+
+# 配置日志级别
+logging:
+  level:
+    com.ashen.contentcenter.feignclient.UserCenterFeignClient: debug
+
+# feign配置
+feign:
+  client:
+    config: 
+      # 想要调用的微服务名称，改成default即对所有服务生效
+      default:
+        # 配置全面默认拦截器
+        requestInterceptors:
+          - com.ashen.contentcenter.feignclient.interceptor.TokenRelayRequestInterceptor
+      user-center:
+        loggerLevel: full
+  httpclient:
+    # 让feign底层使用apache httpclient，而不是默认的URLConnection
+    enabled: true
+    # feign最大连接数
+    max-connections: 200
+    # feign单个路径最大连接数
+    max-connections-per-route: 50
+  # Feign整合Sentinel开关，默认为false
+  sentinel:
+    enabled: true
+
+# actuator端点控制
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+
+# RestTemplate整合Sentinel开关，默认开启
+#resttemplate:
+#  sentinel:
+#    enabled: false
+
+jwt:
+  secret: my-secret-hahahahahahahahahahahahahahahahaha
+  # 有效期，单位秒，默认2周
+  expire-time-in-second: 1209600

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>跳转首页</title>
+    <style>
+        p {
+            text-align: center;
+        }
+        span {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<p>
+    <span id="time">5</span>秒后，自动跳转到首页...
+</p>
+
+<script>
+
+    var time = document.getElementById("time");
+    var i = 4;
+
+    var id = setInterval(showTime, 1000); // 每秒调用一次showTime方法
+
+    function showTime() {
+        time.innerText = i;
+        if (i == 0) {
+            clearInterval(id);
+            location.href = "https://www.google.com";
+        }
+        i--;
+    }
+</script>
+</body>
+</html>

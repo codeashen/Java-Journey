@@ -1,0 +1,94 @@
+/*取消所有默认边距*/
+* {
+    margin: 0;
+    padding: 0;
+    /*让元素大小不会因为padding而改变*/
+    box-sizing: border-box;
+}
+
+body {
+    background: url("../img/register_bg.png") no-repeat;
+    background-size: 100%;
+}
+
+/*主体部分*/
+.layout {
+    width: 900px;
+    height: 500px;
+    border: 8px solid #eeeeee;
+    background-color: white;
+    /*让div水平居中*/
+    margin: auto;
+    margin-top: 80px;
+}
+
+/*左边部分*/
+.left {
+    /*border: 1px solid red;*/
+    float: left;
+    font-size: 20px;
+    margin: 15px;
+}
+.left > p:first-child {
+    color: #ffd026;
+}
+.left > p:last-child {
+    color: #a6a6a6;
+}
+
+/*右边部分*/
+.right {
+    /*border: 1px solid red;*/
+    float: right;
+    margin: 15px;
+    font-size: 15px;
+}
+.right p a {
+    color: pink;
+}
+
+/*中间表单部分*/
+.center {
+    /*border: 1px solid red;*/
+    float: left;
+}
+
+td {
+    height: 45px;
+}
+
+.td_left {
+    width: 150px;
+    text-align: right;
+}
+
+.td_right {
+    padding-left: 50px;
+}
+
+input[type=text], #email, #password, #birthday {
+    width: 250px;
+    height: 32px;
+    border: 1px solid #a6a6a6;
+    /*设置边框圆角*/
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+#checkcode {
+    width: 110px;
+}
+
+#img_code {
+    height: 32px;
+    /*垂直居中*/
+    vertical-align: middle;
+    margin-left: 20px;
+}
+
+#btn_sub {
+    width: 110px;
+    height: 40px;
+    background-color: #ffd026;
+    border:1px solid #ffd026;
+}

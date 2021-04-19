@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+    
+    <!-- 开启注解扫描 -->
+    <context:component-scan base-package="com.ashen.quick"/>
+
+    <!-- 配置视图解析器（处理Controller返回值） -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- 开启SpringMVC框架注解的支持
+    SpringMVC三大组件：处理器映射器、处理器适配器、视图解析器
+        使用<mvc:annotation-driven> 自动加载RequestMappingHandlerMapping（处理映射器） 和
+        RequestMappingHandlerAdapter（处理适配器），可用在SpringMVC.xml 配置文件中使用
+        <mvc:annotation-driven>替代注解处理器和适配器的配置。
+    -->
+    <mvc:annotation-driven/>
+</beans>

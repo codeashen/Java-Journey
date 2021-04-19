@@ -1,0 +1,39 @@
+out/
+*.class
+
+# package file
+*.war
+*.ear
+
+# kdiff3 一种diff工具
+*.orig
+
+# maven
+target/
+
+# eclipse
+.setting/
+.project
+.classpath
+
+# vscode
+/vscode/
+.vscode/
+
+# idea
+.idea/
+/idea/
+*.ipr
+*.iml
+*.iws
+
+# temp file
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
+
+# system
+.DS_store
+Thumbs.db

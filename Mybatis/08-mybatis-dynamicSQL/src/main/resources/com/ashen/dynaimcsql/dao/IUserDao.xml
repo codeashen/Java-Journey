@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ashen.dynaimcsql.dao.IUserDao">
+
+    <!-- 抽取sql片段，include标签引用 -->
+    <sql id="selectAll">
+        select * from user
+    </sql>
+
+    <!-- 配置查询所有用户信息 -->
+    <select id="findAll" resultType="User">
+        <include refid="selectAll"/>
+    </select>
+
+    <!-- 根据条件查询 
+        if 标签内多条件时用and 而不是&&
+    -->
+    <!--<select id="findUserByCondition" resultType="User" parameterType="User">
+        select * from user where 1=1
+        <if test="username != null and username != ''">
+            and username = #{username}
+        </if>
+        <if test="sex != null">
+            and sex = #{sex}
+        </if>
+    </select>-->
+    <select id="findUserByCondition" resultType="User" parameterType="User">
+        select * from user
+        <where>
+            <!-- where标签可以自动去除第一个条件前的and -->
+            <if test="username != null and username != ''">
+                and username = #{username}
+            </if>
+            <if test="sex != null">
+                and sex = #{sex}
+            </if>
+        </where>
+    </select>
+
+    <!-- 查询符合集合条件 -->
+    <select id="findUserInIds" resultType="User" parameterType="User">
+        <include refid="selectAll"/>
+        <where>
+            <if test="ids != null and ids.size() > 0">
+                <foreach collection="ids" open="and id in (" close=")" item="uid" separator=",">
+                    #{uid}
+                </foreach>
+            </if>
+        </where>
+    </select>
+</mapper>

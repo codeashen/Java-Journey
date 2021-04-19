@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单</title>
+</head>
+<body>
+
+<!--
+action: 表交单提交的URL
+method: 表单提方式
+-->
+<form action="#" method="get">
+    <!--
+    input
+    type取值: text(默认)-文本框  password-密码  radio-单选框  checkbox-多选框  submit-提交
+              file-文件选择框  hidden-隐藏域  image-显示src指定图片，点击功能同submit
+        输入框属性: placeholder-输入框中灰色提示文字，输入内容后消失
+        radio和checkbox默认选中属性: checked="checked"，可以只写checked
+    -->
+
+    <!--
+    label标签: 关联input中的内容，如下点文字 “男” 也会选中单选框
+    属性: for-值与关联的input标签的id保持相同
+    -->
+
+    <!--文本框-->
+    <label for="username">用户名：</label>
+    <input type="text" name="username" id="username" placeholder="请输入用户名"><br>
+
+    <!--密码框-->
+    <label for="pwd">密码：</label>
+    <input type="password" name="password" id="pwd" placeholder="请输入密码"><br>
+
+    <!--单选框-->
+    性别：
+    <input type="radio" name="gender" id="mele" value="male" checked>
+    <label for="mele">男</label>
+
+    <input type="radio" name="gender" id="female" value="female">
+    <label for="female">女</label><br>
+
+    <!--多选框-->
+    爱好：
+    <input type="checkbox" name="hobby" id="sing" value="sing">
+    <label for="sing">唱</label>
+
+    <input type="checkbox" name="hobby" id="dance" value="dance">
+    <label for="dance">跳</label>
+
+    <input type="checkbox" name="hobby" id="rap" value="rap">
+    <label for="rap">rap</label>
+
+    <input type="checkbox" name="hobby" id="basket" value="basketball">
+    <label for="basket">篮球</label><br>
+
+    <!--文件选择框-->
+    <label for="file_upload">图片：</label>
+    <input type="file" name="pic" id="file_upload">
+    <br>
+
+    <!--隐藏域-->
+    此处有一隐藏域：
+    <input type="hidden" name="hidden" value="隐藏域值">
+    <br>
+
+    <!--提交按钮-->
+    <input type="submit" value="提交">
+
+    <!--button-->
+    <input type="button" value="一个按钮">
+
+    <!--image(图片提交按钮)-->
+    <input type="image" src="img/regbtn.jpg">
+    <br>
+
+
+    <!--以下是H5新增的一些input的type取值-->
+
+    <!--取色器-->
+    幸运色：<input type="color" name="color">
+    <br>
+
+    <!--日期（年月日）-->
+    生日：<input type="date" name="birthday">
+    <br>
+
+    <!--时间-->
+    注册时间：<input type="datetime-local" name="registerTime">
+    <br>
+
+    <!--邮箱-->
+    邮箱：<input type="email" name="email">
+    <br>
+
+</form>
+
+</body>
+</html>

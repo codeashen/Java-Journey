@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>事件绑定</title>
+</head>
+<body>
+<!--
+如何绑定事件
+    1. 直接在html标签上，指定事件的属性(操作)，属性值就是js代码
+        1. 事件：onclick--- 单击事件
+
+    2. 通过js获取元素对象，设置事件属性，设置成一个函数
+
+    本质是一样的，都是设置元素的onclick属性
+		相同点：
+			方法一是直接在标签内设置属性
+			方法二通过JS获取元素，再设置其属性
+		不同点
+			方法一是执行双引号内的JS代码，所以是onclick="fun();" 要括号，只能有一条语句。
+			方法二是将函数赋值给事件属性，所以是light2.onclick=fun2; 不加括号
+
+	    带括号表示执行，不带括号表示函数名
+-->
+
+<img src="img/on.gif" id="img1" onclick="fun1();">
+<img src="img/on.gif" id="img2">
+
+<script>
+    function fun1() {
+        alert("图片1被点了");
+    }
+
+    function fun2() {
+        alert("图片2被点了");
+    }
+
+    // 1.获取元素对象
+    var img2 = document.getElementById("img2");
+    // 2.设置元素属性
+    //img2.onclick = fun2;  // 注意这里不能加括号,不能写出 fun2()
+
+    //类似于匿名对象
+    img2.onclick = function () {
+        alert("2被点了")
+    }
+</script>
+
+</body>
+</html>

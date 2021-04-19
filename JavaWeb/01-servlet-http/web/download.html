@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>文件下载</title>
+</head>
+<body>
+
+<h4>没有设置响应头，浏览器将展示可解析的内容</h4>
+<a href="/servlet/resource/九尾.jpg">图片</a>
+
+<h4>设置了响应头，资源弹出下载</h4>
+<a href="/servlet/download?filename=九尾.jpg">图片</a>
+<!--使用Servlet获取资源-->
+
+
+<p>指定响应头：content-type : servletContext.getMimeType(filename)</p>
+<p>指定响应头：content-disposition : attachment;filename=xxx</p>
+<p>浏览器将以附件的形式打开资源，弹出框下载</p>
+
+</body>
+</html>

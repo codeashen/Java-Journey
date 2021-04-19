@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>JS特殊语法</title>
+
+    <script>
+        /*
+        了解就行,完全用不着
+        */
+
+        //1.语句以;结尾,如果一行只有一条语句,则;可以省略(不建议)
+        var a = 1
+        alert("a=" + a)
+
+        /*
+        2.变量定义使用var关键字,也可以不使用(不建议)
+            1)用:   定义的是局部变量
+            2)不用: 定义的是全局变量
+         */
+        function fun() {
+            var b = 2;
+            //c = 3; //这样在方法外也访问不到了,我实验的,视频中可以    不用管,歪门邪道,完全可以在方法外定义全局变量
+        }
+        {
+            var c = 5;
+        }
+
+        alert(c); //访问不到b,能访问到c
+    </script>
+</head>
+<body>
+
+</body>
+</html>

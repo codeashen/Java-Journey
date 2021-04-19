@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>JS运算符</title>
+
+    <script>
+        alert(5 + true); //6 -- number
+        alert(5 + true + NaN); //NaN -- number
+        alert(5 + true + NaN + "hello"); //NaNhello -- string
+        alert(5 + "" + true + NaN + "hello"); //5trueNaNhello -- string
+        alert(null + 5); //5 -- number
+
+        alert(+"10" + 10); //20 -- number
+        alert(10 + "10"); //1010 -- string
+    </script>
+</head>
+<body>
+
+</body>
+</html>

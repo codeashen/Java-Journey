@@ -1,0 +1,91 @@
+<!--
+扩展选择器：
+    1. 选择所有元素：
+        * 语法： *{}
+    2. 并集选择器：
+        * 选择器1,选择器2{}
+
+    3. 子选择器：筛选选择器1元素下的选择器2元素
+        * 语法：  选择器1 选择器2{}
+    4. 父选择器：筛选选择器2的父元素选择器1
+        * 语法：  选择器1 > 选择器2{}
+
+    5. 属性选择器：选择元素名称，属性名=属性值的元素
+        * 语法：  元素名称[属性名="属性值"]{}
+
+    6. 伪类选择器：选择一些元素具有的状态
+        * 语法： 元素:状态{}
+        * 如： <a>
+            * 状态：
+                * link：初始化的状态
+                * visited：被访问过的状态
+                * active：正在访问状态
+                * hover：鼠标悬浮状态
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS扩展选择器</title>
+
+    <style>
+
+        /* 并集选择器： 选中span和p标签 */
+        span,p{
+            color: green;
+        }
+
+        /* 子选择器： 选择<div>元素内的所有<p>元素 */
+        div p{
+            color: red;
+        }
+
+        /* 父选择器： 选择所有父级是<div>元素的<p>元素 */
+        div > p {
+            border: 1px solid;
+        }
+
+        /* 属性选择器： 选中属性type="text"的input标签 */
+        input[type="text"]{
+            border: 5px solid;
+        }
+
+        /*
+        伪类选择器:  选中特定状态下的元素
+        语法:       元素:状态{}
+        */
+        a:link{
+            color: deeppink;
+        }
+        a:visited{
+
+            color: orange;
+        }
+        a:active{
+            color: green;
+        }
+        a:hover{
+            color: blue;
+        }
+
+    </style>
+</head>
+<body>
+
+<span>普通span</span><p>普通p</p>
+<br>
+
+<div>
+    <p>div里的p</p>
+</div>
+<br>
+
+文本框：<input type="text"><br>
+密码框：<input type="password"><br>
+<br>
+
+<a href="#">超链接</a>
+
+</body>
+</html>

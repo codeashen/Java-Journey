@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM_获取元素对象</title>
+</head>
+<body>
+<!--
+* 获取页面标签(元素)对象：Element
+    * document.getElementById("id值"):通过元素的id获取元素对象
+
+* 操作 Element 对象：
+    1. 修改属性值：
+        1) 明确获取的对象是哪一个？
+        2) 查看API文档，找其中有哪些属性可以设置
+    2. 修改标签体内容：
+        * 属性：innerHTML
+        1) 获取元素对象
+        2) 使用innerHTML属性修改标签体内容
+-->
+
+<img src="img/off.gif" id="light">
+<h1 id="title">初始标题</h1>
+
+<script>
+    // 修改元素属性
+    var light = document.getElementById("light");
+    alert("换图片src属性...");
+    light.src = "img/on.gif";
+
+    // 修改标签体内容
+    var title = document.getElementById("title");
+    alert("换h1标签体内容...");
+    title.innerHTML = "修改后的标题";
+</script>
+
+</body>
+</html>

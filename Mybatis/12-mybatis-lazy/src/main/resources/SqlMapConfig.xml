@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="jdbcConfig.properties"/>
+
+    <!-- 配置参数，Mybatis的设置 -->
+    <settings>
+        <!-- 开启全局延迟加载支持 -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!-- 是否立即加载 false-按需加载 true-立即加载 -->
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
+
+    <typeAliases>
+        <package name="com.ashen.lazy.domain"/>
+    </typeAliases>
+
+    <!-- 配置Mybatis环境 -->
+    <environments default="mysql">
+        <!-- 配置mysql环境 -->
+        <environment id="mysql">
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- 指定映射配置文件的位置 -->
+    <mappers>
+        <package name="com.ashen.lazy.dao"></package>
+    </mappers>
+</configuration>

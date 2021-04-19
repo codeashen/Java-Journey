@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 配置Service对象(工厂模式创建创建bean) -->
+    <bean id="proxyAccountService" factory-bean="beanFactory" factory-method="getAccountService"/>
+
+    <!-- 配置BeanFactory -->
+    <bean id="beanFactory" class="com.ashen.account.factory.BeanFactory">
+        <property name="accountService" ref="accountService"/>
+        <property name="txManager" ref="txManager"/>
+    </bean>
+
+    <!-- 配置Service -->
+    <bean id="accountService" class="com.ashen.account.service.impl.AccountServiceImpl">
+        <!-- 注入dao -->
+        <property name="accountDao" ref="accountDao"/>
+        <!-- 注入txManager -->
+        <!-- <property name="txManager" ref="txManager"/> -->
+    </bean>
+
+    <!-- 配置dao -->
+    <bean id="accountDao" class="com.ashen.account.dao.impl.AccountDaoImpl">
+        <!-- 注入QueryRunner -->
+        <property name="runner" ref="runner"/>
+        <!-- 注入connectionUtils -->
+        <property name="connectionUtils" ref="connectionUtils"/>
+    </bean>
+
+    <!-- 配置QueryRunner
+        不希望QueryRunner操作数据库时从数据源中获取连接，所以不注入数据源了，
+             详见AccountDaoImpl文档注释 -->
+    <bean id="runner" class="org.apache.commons.dbutils.QueryRunner" scope="prototype">
+        <!-- 注入数据源（构造方法注入） -->
+        <!-- <constructor-arg name="ds" ref="dataSource"></constructor-arg> -->
+    </bean>
+
+    <!-- 配置数据源 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <!-- 注入数据库连接信息 -->
+        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/demo_mybatis"/>
+        <property name="user" value="root"/>
+        <property name="password" value="root"/>
+    </bean>
+
+    <!-- 配置Connection工具类 -->
+    <bean id="connectionUtils" class="com.ashen.account.utils.ConnectionUtils">
+        <!-- 注入数据源 -->
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- 配置事务管理器 -->
+    <bean id="txManager" class="com.ashen.account.utils.TransactionManager">
+        <!-- 注入数据库连接工具类 -->
+        <property name="connectionUtils" ref="connectionUtils"/>
+    </bean>
+</beans>

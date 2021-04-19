@@ -1,0 +1,48 @@
+spring:
+  cloud:
+    nacos:
+      #指定nacos server地址
+      server-addr: localhost:8848
+      discovery:
+        #指定命名空间、集群
+        namespace: 01511f2b-269d-442f-8cde-91a6220ce63d
+        cluster-name: Shanghai
+        #指定元数据
+        metadata:
+          author: ashen
+          date: 2021-01-27 18:46
+    stream:
+      rocketmq:
+        binder:
+          name-server: 127.0.0.1:9876
+      bindings: 
+        input: 
+          # 对应生产者的topic
+          destination: add-bonus
+          # 一定要设置，非rocketmq可留空
+          group: binder-group
+        my-input:
+          destination: stream-my-topic
+          group: my-group
+  application:
+    name: user-center
+  datasource:
+    url: jdbc:mysql://120.92.164.231:3306/note_user
+    hikari:
+      username: root
+      password: root
+      driver-class-name: com.mysql.cj.jdbc.Driver
+  zipkin:
+    base-url: http://localhost:9411/
+  sleuth:
+    sampler:
+      # 请求取样率，上报到zipkin的trace比例，默认是 0.1（10%），这里为了测试方便配置所有trace都上传
+      probability: 1.0
+
+server:
+  port: 8001
+
+jwt:
+  secret: my-secret-hahahahahahahahahahahahahahahahaha
+  # 有效期，单位秒，默认2周
+  expire-time-in-second: 1209600

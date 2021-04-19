@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Window对象</title>
+</head>
+<body>
+<!--
+Window：窗口对象
+	    1. 创建
+	        不需要创建，可以直接通过方法名或属性名访问其方法或属性
+	    2. 方法
+	         1) 与弹出框有关的方法：
+	            alert()			显示带有一段消息和一个确认按钮的警告框。
+	            confirm()		显示带有一段消息以及确认按钮和取消按钮的对话框。
+									* 如果用户点击确定按钮，则方法返回true
+									* 如果用户点击取消按钮，则方法返回false
+	            prompt()		显示可提示用户输入的对话框。
+									* 返回值：获取用户输入的值
+	         2) 与打开关闭有关的方法：
+	            open(url)		打开一个新的浏览器窗口
+									* 参数：要打开的url地址，不写打开空窗口
+									* 返回新的Window对象
+	            close()			关闭浏览器窗口。
+									* 谁调用我 ，我关谁
+	         3) 与定时器有关的方式
+				setTimeout(code,millisec)	在指定的毫秒数后调用函数或计算表达式。
+									* 参数：
+										1. code		必需。要调用的函数后要执行的js代码或者方法对象
+										2. millisec	必需。在执行代码前需等待的毫秒数
+									* 返回值：唯一标识，用于取消定时器
+	            clearTimeout()	取消由 setTimeout() 方法设置的 timeout。
+
+	            setInterval()	按照指定的周期（以毫秒计）来调用函数或计算表达式。
+	            clearInterval()	取消由 setInterval() 设置的 timeout。
+        3. 属性：
+	        1) 获取其他BOM对象：
+	            Screen
+	            Navigator
+	            location
+	            history
+	        2) 获取DOM对象
+	            document
+	        由于Window不需要创建即可访问属性和方法，所以以上对象都可以直接通过属性名获取。
+	    4. 特点
+	        * Window对象不需要创建可以直接使用 window使用。 window.方法名();
+	        * window引用可以省略。  方法名();
+-->
+
+<input type="button" id="openBtn" value="打开新窗口">
+<input type="button" id="closeBtn" value="关闭新窗口">
+
+<script>
+    // 弹出框
+    alert("Hello");
+    window.alert("Hello Window");
+
+    // 确认框
+    var flag = confirm("确定要卸载吗？");
+    if (flag) {
+        alert("欢迎下次使用");
+    } else {
+        alert("感谢手下留情");
+    }
+
+    // 输入框
+    var username = prompt("请输入用户名");
+    alert("username：" + username);
+
+    // 打开/关闭窗口
+    var openBtn = document.getElementById("openBtn");
+    var closeBtn = document.getElementById("closeBtn");
+    var newWindow;
+    openBtn.onclick = function () {
+        // open(); //打开空窗口
+        newWindow = open("https://www.baidu.com"); //返回值是新的窗口对象
+    }
+    closeBtn.onclick = function () {
+        newWindow.close();
+    }
+
+    // 计时器
+    function boom() {
+        alert("boom~~~")
+    }
+    // setTimeout("alert('boom~~~')", 3000);
+    // setTimeout("boom();", 3000);
+    var id = setTimeout(boom, 3000);     //方法中参数是执行的JS代码的三种写法
+    clearTimeout(id);
+
+    var id1 = setInterval(boom, 2000);
+    clearInterval(id1);
+
+
+    // Window对象的属性
+    var his1 = window.history;
+    var his2 = history; //可以直接获取
+    document.write("<br>his1 --- " + his1 + "<br>his2 --- " + his2); // 省略了 window.
+    window.document.write("<br>这里是用Window对象获取的document");
+
+</script>
+
+</body>
+</html>

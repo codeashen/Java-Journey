@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 指定namespace，说明关联的是哪个dao -->
+<mapper namespace="com.ashen.design.dao.IUserDao">
+
+    <!-- 配置查询所有用户信息 -->
+    <select id="findAll" resultType="com.ashen.design.domain.User">
+        select * from user
+    </select>
+</mapper>
