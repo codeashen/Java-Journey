@@ -1,1 +1,2 @@
-authority-web/src/main/webapp/plugins/ckeditor/plugins/* linguist-vendored
+# authority-web/src/main/webapp/plugins/ckeditor/plugins/* linguist-vendored
+*.js linguist-language=Java
