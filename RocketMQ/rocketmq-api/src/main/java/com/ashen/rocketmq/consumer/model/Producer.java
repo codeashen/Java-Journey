@@ -1,4 +1,4 @@
-package com.ashen.rocketmq.model;
+package com.ashen.rocketmq.consumer.model;
 
 import com.ashen.rocketmq.constant.Const;
 import org.apache.rocketmq.client.exception.MQClientException;

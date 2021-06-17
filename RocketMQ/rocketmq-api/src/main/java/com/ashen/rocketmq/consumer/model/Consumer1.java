@@ -1,4 +1,4 @@
-package com.ashen.rocketmq.model;
+package com.ashen.rocketmq.consumer.model;
 
 import com.ashen.rocketmq.constant.Const;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
@@ -11,22 +11,17 @@ import org.apache.rocketmq.common.protocol.heartbeat.MessageModel;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-public class Consumer2 {
+public class Consumer1 {
 
-    public Consumer2() {
+    public Consumer1() {
         try {
-            String group_name = "test_model_consumer_name2";
+            String group_name = "test_model_consumer_name1";
             DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(group_name);
             consumer.setNamesrvAddr(Const.NAMESRV_ADDR_MASTER_SLAVE);
-            consumer.subscribe("test_model_topic", "TagB");
+            consumer.subscribe("test_model_topic", "TagA");
             consumer.setMessageModel(MessageModel.CLUSTERING);
             // consumer.setMessageModel(MessageModel.BROADCASTING);
-            consumer.registerMessageListener(new MessageListenerConcurrently() {
-                @Override
-                public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
-                    return null;
-                }
-            });
+            consumer.registerMessageListener(new Listener());
             consumer.start();
         } catch (Exception e) {
             e.printStackTrace();
@@ -53,7 +48,7 @@ public class Consumer2 {
     }
 
     public static void main(String[] args) {
-        Consumer2 c1 = new Consumer2();
-        System.out.println("c2 start..");
+        Consumer1 c1 = new Consumer1();
+        System.out.println("c1 start..");
     }
 }
