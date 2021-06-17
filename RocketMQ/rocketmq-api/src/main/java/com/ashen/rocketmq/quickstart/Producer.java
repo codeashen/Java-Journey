@@ -19,7 +19,7 @@ public class Producer {
         // 创建producer对象
         DefaultMQProducer producer = new DefaultMQProducer("test_quick_producer_name");
         // 设置 NamesrvAddr
-        producer.setNamesrvAddr(Const.NAMESRV_ADDR_SINGLE);
+        producer.setNamesrvAddr(Const.NAMESRV_ADDR_MASTER_SLAVE);
         
         // 可以设置诸多生产者参数
         // producer.setCreateTopicKey("test_topic_1");     // 创建topic
@@ -35,7 +35,7 @@ public class Producer {
                     "TagA",
                     "key_" + i,
                     ("Hello RocketMQ " + i).getBytes());
-            message.setDelayTimeLevel(1);   // 设置延迟级别
+            // message.setDelayTimeLevel(1);   // 设置延迟级别
             
             // 同步发送消息
             // SendResult result = producer.send(message);

@@ -18,7 +18,7 @@ public class Consumer {
         // 创建消费者对象
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("test_quick_consumer_name");
         // 设置 NameServer 地址
-        consumer.setNamesrvAddr(Const.NAMESRV_ADDR_SINGLE);
+        consumer.setNamesrvAddr(Const.NAMESRV_ADDR_MASTER_SLAVE);
         // 设置消费位点
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
         // 指定订阅topic和订阅tag的表达式
