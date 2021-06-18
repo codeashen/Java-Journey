@@ -10,7 +10,7 @@ public class Producer {
     public static void main(String[] args) throws MQClientException, InterruptedException {
         String group_name = "test_model_producer_name";
         DefaultMQProducer producer = new DefaultMQProducer(group_name);
-        producer.setNamesrvAddr(Const.NAMESRV_ADDR_MASTER_SLAVE);
+        producer.setNamesrvAddr(Const.M2_S2_ASYNC);
         producer.start();
 
         for (int i = 0; i < 10; i++) {

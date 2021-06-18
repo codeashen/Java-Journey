@@ -18,11 +18,11 @@ public class Consumer {
         // 创建消费者对象
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("test_quick_consumer_name");
         // 设置 NameServer 地址
-        consumer.setNamesrvAddr(Const.NAMESRV_ADDR_MASTER_SLAVE);
+        consumer.setNamesrvAddr(Const.M2_S2_ASYNC);
         // 设置消费位点
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
         // 指定订阅topic和订阅tag的表达式
-        consumer.subscribe("test_quick_topic", "*");
+        consumer.subscribe("one_queue", "*");
         
         // 监听消息，指定消费行为
         consumer.registerMessageListener(new MessageListenerConcurrently() {
@@ -34,8 +34,8 @@ public class Consumer {
                     String tags = me.getTags();
                     String keys = me.getKeys();
                     if (Objects.equals(keys, "key_1")) {
-                        System.err.println("消息消费失败...");
-                        int a = 1 / 0;
+                        // System.err.println("消息消费失败...");
+                        // int a = 1 / 0;
                     }
                     
                     String body = new String(me.getBody());
