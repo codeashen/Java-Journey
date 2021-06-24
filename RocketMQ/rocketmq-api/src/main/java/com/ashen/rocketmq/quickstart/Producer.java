@@ -23,11 +23,11 @@ public class Producer {
         // 开启生产者
         producer.start();
 
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 16; i++) {
             // 创建消息
             Message message = new Message("one_queue",
-                    "TagA",
-                    "key_" + i,
+                    "TagA",  // 标签，用于消息过滤
+                    "key_" + i,  // 消息标识，用于查询消息，建议尽可能唯一且与业务相关
                     ("Hello RocketMQ " + i).getBytes());
             // message.setDelayTimeLevel(1);   // 设置延迟级别
             
