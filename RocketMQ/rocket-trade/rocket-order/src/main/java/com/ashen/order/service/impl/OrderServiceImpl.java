@@ -15,7 +15,7 @@ import java.util.UUID;
 @Service
 public class OrderServiceImpl implements OrderService {
 
-    @DubboReference
+    @DubboReference(check = false)
     private StoreServiceApi storeServiceApi;
     @Autowired
     private OrderMapper orderMapper;

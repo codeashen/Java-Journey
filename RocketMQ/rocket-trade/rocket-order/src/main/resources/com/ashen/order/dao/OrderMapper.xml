@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ashen.order.dao.OrderMapper">
+    <resultMap id="BaseResultMap" type="com.ashen.order.entity.Order">
+        <id column="order_id" property="orderId" jdbcType="VARCHAR"/>
+        <result column="order_type" property="orderType" jdbcType="VARCHAR"/>
+        <result column="city_id" property="cityId" jdbcType="VARCHAR"/>
+        <result column="platform_id" property="platformId" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="supplier_id" property="supplierId" jdbcType="VARCHAR"/>
+        <result column="goods_id" property="goodsId" jdbcType="VARCHAR"/>
+        <result column="order_status" property="orderStatus" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List">
+        order_id, order_type, city_id, platform_id, user_id, supplier_id, goods_id, order_status, 
+        remark, create_by, create_time, update_by, update_time
+    </sql>
+
+    <update id="updateOrderStatus">
+        update t_order
+        set order_status = #{orderStatus,jdbcType=VARCHAR},
+            update_by    = #{updateBy,jdbcType=VARCHAR},
+            update_time  = #{updateTime,jdbcType=TIMESTAMP}
+        where order_id = #{orderId,jdbcType=VARCHAR}
+    </update>
+
+</mapper>
