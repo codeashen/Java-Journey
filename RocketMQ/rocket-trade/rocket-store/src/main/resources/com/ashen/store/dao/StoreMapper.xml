@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ashen.store.dao.StoreMapper">
+    <resultMap id="BaseResultMap" type="com.ashen.store.entity.Store">
+        <id column="store_id" property="storeId" jdbcType="VARCHAR"/>
+        <result column="goods_id" property="goodsId" jdbcType="VARCHAR"/>
+        <result column="supplier_id" property="supplierId" jdbcType="VARCHAR"/>
+        <result column="goods_name" property="goodsName" jdbcType="VARCHAR"/>
+        <result column="store_count" property="storeCount" jdbcType="INTEGER"/>
+        <result column="version" property="version" jdbcType="INTEGER"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        store_id, goods_id, supplier_id, goods_name, store_count, version, create_by, create_time, update_by, update_time
+    </sql>
+
+    <select id="selectVersion" resultType="int">
+        select version
+        from t_store ts
+        where ts.supplier_id = #{supplierId,jdbcType=VARCHAR}
+          and ts.goods_id = #{goodsId,jdbcType=VARCHAR}
+    </select>
+
+    <update id="updateStoreCountByVersion">
+        update t_store ts
+        set store_count = store_count - 1,
+            version     = version + 1,
+            update_by   = #{updateBy,jdbcType=VARCHAR},
+            update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where ts.supplier_id = #{supplierId,jdbcType=VARCHAR}
+          and ts.goods_id = #{goodsId,jdbcType=VARCHAR}
+          and ts.version = #{version,jdbcType=INTEGER}
+          and ts.store_count > 0
+    </update>
+
+    <select id="selectStoreCount" resultType="int">
+        select store_count
+        from t_store ts
+        where ts.supplier_id = #{supplierId,jdbcType=VARCHAR}
+          and ts.goods_id = #{goodsId,jdbcType=VARCHAR}
+    </select>
+</mapper>
